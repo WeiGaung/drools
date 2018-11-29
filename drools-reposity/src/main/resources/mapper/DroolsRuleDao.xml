@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wenba.reposity.drools.DroolsRuleDao">
+
+  <resultMap id="BaseResultMap" type="com.wenba.domain.DroolsRule">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="drools_id" jdbcType="INTEGER" property="droolsId" />
+    <result column="drools_vers" jdbcType="VARCHAR" property="droolsVers" />
+    <result column="rule_index" jdbcType="INTEGER" property="ruleIndex" />
+    <result column="rule_detail_name" jdbcType="VARCHAR" property="ruleDetailName" />
+    <result column="no_loop" jdbcType="BIT" property="noLoop" />
+    <result column="lock_on_active" jdbcType="BIT" property="lockOnActive" />
+    <result column="salience" jdbcType="TINYINT" property="salience" />
+    <result column="p_type_id" jdbcType="INTEGER" property="pTypeId" />
+    <result column="rule_if" jdbcType="VARCHAR" property="ruleIf" />
+    <result column="rule_then" jdbcType="VARCHAR" property="ruleThen" />
+    <result column="rule_status" jdbcType="TINYINT" property="ruleStatus" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="ext" jdbcType="VARCHAR" property="ext" />
+
+    <result column="drools_name" jdbcType="VARCHAR" property="droolsName" />
+  </resultMap>
+
+  <resultMap id="DBBaseResultMap" type="com.wenba.domain.DroolsInOutParams">
+    <result column="p_name" jdbcType="VARCHAR" property="pName" />
+    <result column="p_type" jdbcType="VARCHAR" property="pType" />
+    <result column="p_source" jdbcType="VARCHAR" property="pSource" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, drools_id, drools_vers, rule_index, rule_detail_name, no_loop, lock_on_active,
+    salience, p_type_id, rule_if, rule_then, rule_status, create_time, update_time, ext
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from drools_rule
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from drools_rule
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.wenba.domain.DroolsRule">
+    insert into drools_rule (id, drools_id, drools_vers,
+      rule_index, rule_detail_name, no_loop, 
+      lock_on_active, salience, p_type_id, 
+      rule_if, rule_then, rule_status, 
+      create_time, update_time, ext
+      )
+    values (#{id,jdbcType=INTEGER}, #{droolsId,jdbcType=INTEGER}, #{droolsVers,jdbcType=VARCHAR},
+      #{ruleIndex,jdbcType=INTEGER}, #{ruleDetailName,jdbcType=VARCHAR}, #{noLoop,jdbcType=BIT}, 
+      #{lockOnActive,jdbcType=BIT}, #{salience,jdbcType=TINYINT}, #{pTypeId,jdbcType=INTEGER}, 
+      #{ruleIf,jdbcType=VARCHAR}, #{ruleThen,jdbcType=VARCHAR}, #{ruleStatus,jdbcType=TINYINT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{ext,jdbcType=VARCHAR}
+      )
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.wenba.domain.DroolsRule">
+    insert into drools_rule
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="droolsId != null">
+        drools_id,
+      </if>
+      <if test="droolsVers != null">
+        drools_vers,
+      </if>
+      <if test="ruleIndex != null">
+        rule_index,
+      </if>
+      <if test="ruleDetailName != null">
+        rule_detail_name,
+      </if>
+      <if test="noLoop != null">
+        no_loop,
+      </if>
+      <if test="lockOnActive != null">
+        lock_on_active,
+      </if>
+      <if test="salience != null">
+        salience,
+      </if>
+      <if test="pTypeId != null">
+        p_type_id,
+      </if>
+      <if test="ruleIf != null">
+        rule_if,
+      </if>
+      <if test="ruleThen != null">
+        rule_then,
+      </if>
+      <if test="ruleStatus != null">
+        rule_status,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="ext != null">
+        ext,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="droolsId != null">
+        #{droolsId,jdbcType=INTEGER},
+      </if>
+      <if test="droolsVers != null">
+        #{droolsVers,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleIndex != null">
+        #{ruleIndex,jdbcType=INTEGER},
+      </if>
+      <if test="ruleDetailName != null">
+        #{ruleDetailName,jdbcType=VARCHAR},
+      </if>
+      <if test="noLoop != null">
+        #{noLoop,jdbcType=BIT},
+      </if>
+      <if test="lockOnActive != null">
+        #{lockOnActive,jdbcType=BIT},
+      </if>
+      <if test="salience != null">
+        #{salience,jdbcType=TINYINT},
+      </if>
+      <if test="pTypeId != null">
+        #{pTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="ruleIf != null">
+        #{ruleIf,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleThen != null">
+        #{ruleThen,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleStatus != null">
+        #{ruleStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ext != null">
+        #{ext,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.wenba.domain.DroolsRule">
+    update drools_rule
+    <set>
+      <if test="droolsId != null">
+        drools_id = #{droolsId,jdbcType=INTEGER},
+      </if>
+      <if test="droolsVers != null">
+        drools_vers = #{droolsVers,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleIndex != null">
+        rule_index = #{ruleIndex,jdbcType=INTEGER},
+      </if>
+      <if test="ruleDetailName != null">
+        rule_detail_name = #{ruleDetailName,jdbcType=VARCHAR},
+      </if>
+      <if test="noLoop != null">
+        no_loop = #{noLoop,jdbcType=BIT},
+      </if>
+      <if test="lockOnActive != null">
+        lock_on_active = #{lockOnActive,jdbcType=BIT},
+      </if>
+      <if test="salience != null">
+        salience = #{salience,jdbcType=TINYINT},
+      </if>
+      <if test="pTypeId != null">
+        p_type_id = #{pTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="ruleIf != null">
+        rule_if = #{ruleIf,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleThen != null">
+        rule_then = #{ruleThen,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleStatus != null">
+        rule_status = #{ruleStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ext != null">
+        ext = #{ext,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.wenba.domain.DroolsRule">
+    update drools_rule
+    set drools_id = #{droolsId,jdbcType=INTEGER},
+      drools_vers = #{droolsVers,jdbcType=VARCHAR},
+      rule_index = #{ruleIndex,jdbcType=INTEGER},
+      rule_detail_name = #{ruleDetailName,jdbcType=VARCHAR},
+      no_loop = #{noLoop,jdbcType=BIT},
+      lock_on_active = #{lockOnActive,jdbcType=BIT},
+      salience = #{salience,jdbcType=TINYINT},
+      p_type_id = #{pTypeId,jdbcType=INTEGER},
+      rule_if = #{ruleIf,jdbcType=VARCHAR},
+      rule_then = #{ruleThen,jdbcType=VARCHAR},
+      rule_status = #{ruleStatus,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      ext = #{ext,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+
+  <!-- 新增具体规则信息 -->
+  <insert id="insertDroolsRule" parameterType="com.wenba.domain.DroolsRule">
+    insert into drools_rule
+    (drools_id, drools_vers,
+    rule_index, rule_detail_name, no_loop,
+    lock_on_active, salience, p_type_id,
+    rule_if, rule_then, rule_status,
+    ext
+    )
+    values
+    <foreach item="item" collection="list" separator=",">
+      (#{item.droolsId,jdbcType=INTEGER}, #{item.droolsVers,jdbcType=VARCHAR},
+      #{item.ruleIndex,jdbcType=INTEGER}, #{item.ruleDetailName,jdbcType=VARCHAR}, #{item.noLoop,jdbcType=BIT},
+      #{item.lockOnActive,jdbcType=BIT}, #{item.salience,jdbcType=TINYINT}, #{item.pTypeId,jdbcType=INTEGER},
+      #{item.ruleIf,jdbcType=VARCHAR}, #{item.ruleThen,jdbcType=VARCHAR}, #{item.ruleStatus,jdbcType=TINYINT},
+      #{item.ext,jdbcType=VARCHAR}
+      )
+    </foreach>
+  </insert>
+
+
+
+  <!-- 更新具体规则信 -->
+  <update id="updateDroolsRule" parameterType="java.util.List" statementType="STATEMENT">
+    <foreach collection="list" item="item" separator=";">
+      update drools_rule
+      <set>
+          update_time = now(),
+        <!--<if test="item.droolsId != null">
+          drools_id = ${item.droolsId},
+        </if>
+        <if test="item.droolsVers != null">
+          drools_vers = '${item.droolsVers}',
+        </if>-->
+        <if test="item.ruleIndex != null">
+          rule_index = ${item.ruleIndex},
+        </if>
+        <if test="item.ruleDetailName != null">
+          rule_detail_name = '${item.ruleDetailName}',
+        </if>
+        <if test="item.noLoop != null">
+          no_loop = ${item.noLoop},
+        </if>
+        <if test="item.lockOnActive != null">
+          lock_on_active = ${item.lockOnActive},
+        </if>
+        <if test="item.salience != null">
+          salience = ${item.salience},
+        </if>
+        <if test="item.pTypeId != null">
+          p_type_id = ${item.pTypeId},
+        </if>
+        <if test="item.ruleIf != null">
+          rule_if = '${item.ruleIf}',
+        </if>
+        <if test="item.ruleThen != null">
+          rule_then = '${item.ruleThen}',
+        </if>
+        <if test="item.ruleStatus != null">
+          rule_status = '${item.ruleStatus}',
+        </if>
+        <if test="item.ext != null">
+          ext = '${item.ext}',
+        </if>
+      </set>
+      <where>
+        <if test="item.id != null">
+          and id = ${item.id}
+        </if>
+        <!--<if test="item.droolsId != null">
+          and drools_id = ${item.droolsId}
+        </if>
+        <if test="item.droolsVers != null">
+          and drools_vers = '${item.droolsVers}'
+        </if>-->
+      </where>
+    </foreach>
+  </update>
+
+
+  <!-- 查询所有具体规则信息 -->
+  <select id="selectDroolsRule" parameterType="java.util.List" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from drools_rule
+    where
+    <if test="listDr != null  and  listDr.size() != 0  ">
+      drools_id in
+      <foreach item="item" index="index" collection="listDr"  open="(" separator="," close=")">
+        #{item.droolsId}
+      </foreach>
+    </if>
+    <if test="listDr != null  and  listDr.size() != 0  ">
+      and drools_vers in
+      <foreach item="item" index="index" collection="listDr"  open="(" separator="," close=")">
+        #{item.droolsVers}
+      </foreach>
+    </if>
+  </select>
+
+
+  <!-- 查询所有具体规则信息 -->
+  <select id="selectDroolsRuleInfoList" parameterType="java.util.List" resultMap="BaseResultMap">
+    select
+    di.drools_name,dr. drools_id,dr.drools_vers,dr.rule_index,dr.rule_detail_name,dr.no_loop,dr.lock_on_active,dr.salience,dr.p_type_id,dr.rule_if,dr.rule_then
+    from drools_rule dr
+    left join drools_info di on di.id = dr. drools_id
+    where
+    <if test="listDr != null  and  listDr.size() != 0  ">
+      dr.drools_id in
+      <foreach item="item" index="index" collection="listDr"  open="(" separator="," close=")">
+        #{item.droolsId}
+      </foreach>
+    </if>
+    <if test="listDr != null  and  listDr.size() != 0  ">
+      and dr.drools_vers in
+      <foreach item="item" index="index" collection="listDr"  open="(" separator="," close=")">
+        #{item.droolsVers}
+      </foreach>
+    </if>
+  </select>
+
+  <!-- 查询所有具体规则信息 -->
+  <select id="selectDroolsRuleInfo" parameterType="com.wenba.domain.DroolsRule" resultMap="BaseResultMap">
+    select
+    di.drools_name,dr. drools_id,dr.drools_vers,dr.rule_index,dr.rule_detail_name,dr.no_loop,dr.lock_on_active,dr.salience,dr.p_type_id,dr.rule_if,dr.rule_then
+    from drools_rule dr
+    left join drools_info di on di.id = dr. drools_id
+    <where>
+        <if test="droolsId != null">
+          and dr.drools_id = ${droolsId}
+        </if>
+        <if test="droolsVers != null">
+          and dr.drools_vers = #{droolsVers}
+        </if>
+    </where>
+
+
+  </select>
+
+
+  <!-- 查询要生成实体类数据 -->
+  <select id="selectDroolsBean" parameterType="com.wenba.domain.DroolsRule" resultMap="DBBaseResultMap" >
+    select p_name,p_type,p_source
+      from drools_rule_p_type
+    where
+        drools_id = ${droolsId}
+      and drools_vers = #{droolsVers}
+    /*union
+    select 'droolsNameVers' as p_name,'String' as p_type
+      from dual*/
+  </select>
+
+</mapper>

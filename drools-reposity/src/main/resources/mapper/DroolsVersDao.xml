@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wenba.reposity.drools.DroolsVersDao">
+
+  <resultMap id="BaseResultMap" type="com.wenba.domain.DroolsVers">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="drools_id" jdbcType="INTEGER" property="droolsId" />
+    <result column="drools_vers" jdbcType="VARCHAR" property="droolsVers" />
+    <result column="drools_vers_desc" jdbcType="VARCHAR" property="droolsVersDesc" />
+    <result column="drools_vers_status" jdbcType="TINYINT" property="droolsVersStatus" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="ext" jdbcType="VARCHAR" property="ext" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, drools_id, drools_vers, drools_vers_desc, drools_vers_status, create_time, update_time, 
+    ext
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from drools_vers
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from drools_vers
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.wenba.domain.DroolsVers">
+    insert into drools_vers (id, drools_id, drools_vers, 
+      drools_vers_desc, drools_vers_status, create_time, 
+      update_time, ext)
+    values (#{id,jdbcType=INTEGER}, #{droolsId,jdbcType=INTEGER}, #{droolsVers,jdbcType=VARCHAR}, 
+      #{droolsVersDesc,jdbcType=VARCHAR}, #{droolsVersStatus,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{ext,jdbcType=VARCHAR})
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.wenba.domain.DroolsVers">
+    insert into drools_vers
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="droolsId != null">
+        drools_id,
+      </if>
+      <if test="droolsVers != null">
+        drools_vers,
+      </if>
+      <if test="droolsVersDesc != null">
+        drools_vers_desc,
+      </if>
+      <if test="droolsVersStatus != null">
+        drools_vers_status,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="ext != null">
+        ext,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="droolsId != null">
+        #{droolsId,jdbcType=INTEGER},
+      </if>
+      <if test="droolsVers != null">
+        #{droolsVers,jdbcType=VARCHAR},
+      </if>
+      <if test="droolsVersDesc != null">
+        #{droolsVersDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="droolsVersStatus != null">
+        #{droolsVersStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ext != null">
+        #{ext,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.wenba.domain.DroolsVers">
+    update drools_vers
+    <set>
+      <if test="droolsId != null">
+        drools_id = #{droolsId,jdbcType=INTEGER},
+      </if>
+      <if test="droolsVers != null">
+        drools_vers = #{droolsVers,jdbcType=VARCHAR},
+      </if>
+      <if test="droolsVersDesc != null">
+        drools_vers_desc = #{droolsVersDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="droolsVersStatus != null">
+        drools_vers_status = #{droolsVersStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ext != null">
+        ext = #{ext,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.wenba.domain.DroolsVers">
+    update drools_vers
+    set drools_id = #{droolsId,jdbcType=INTEGER},
+      drools_vers = #{droolsVers,jdbcType=VARCHAR},
+      drools_vers_desc = #{droolsVersDesc,jdbcType=VARCHAR},
+      drools_vers_status = #{droolsVersStatus,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      ext = #{ext,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+
+
+  <!-- 新增规则版本信息 -->
+  <insert id="insertDroolsVers" parameterType="com.wenba.domain.DroolsVers">
+    insert into drools_vers
+    (drools_id, drools_vers,
+    drools_vers_desc, drools_vers_status,
+    ext)
+    values
+    <foreach item="item" collection="list" separator=",">
+      (#{item.droolsId,jdbcType=INTEGER}, #{item.droolsVers,jdbcType=VARCHAR},
+      #{item.droolsVersDesc,jdbcType=VARCHAR}, #{item.droolsVersStatus,jdbcType=TINYINT},
+      #{item.ext,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
+
+
+
+  <!-- 更新规则版本信息 -->
+  <update id="updateDroolsVers" parameterType="java.util.List" statementType="STATEMENT">
+    <foreach collection="list" item="item" separator=";">
+      update drools_vers
+      <set>
+        update_time = now(),
+        <if test="item.droolsId != null">
+          drools_id = ${item.droolsId},
+        </if>
+        <if test="item.droolsVers != null">
+          drools_vers = '${item.droolsVers}',
+        </if>
+        <if test="item.droolsVersDesc != null">
+          drools_vers_desc = '${item.droolsVersDesc}',
+        </if>
+        <if test="item.droolsVersStatus != null">
+          drools_vers_status = '${item.droolsVersStatus}',
+        </if>
+        <if test="item.ext != null">
+          ext = '${item.ext}',
+        </if>
+      </set>
+      <where>
+          drools_id = ${item.droolsId}
+        <if test="item.droolsVers != null">
+          and drools_vers = '${item.droolsVers}'
+        </if>
+      </where>
+    </foreach>
+  </update>
+
+
+
+  <!-- 查询所有规则版本信息 -->
+  <select id="selectDroolsVers" parameterType="java.util.List" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from drools_vers
+    where
+    <if test="listDv != null  and  listDv.size() != 0  ">
+      drools_id in
+      <foreach item="item" index="index" collection="listDv"  open="(" separator="," close=")">
+        #{item.droolsId}
+      </foreach>
+    </if>
+    <if test="listDv != null  and  listDv.size() != 0  ">
+      and drools_vers in
+      <foreach item="item" index="index" collection="listDv"  open="(" separator="," close=")">
+        #{item.droolsVers}
+      </foreach>
+    </if>
+  </select>
+
+
+  <select id="selectDroolsInfoIdName" resultType="com.wenba.domain.DroolsIdVers">
+    select
+      di.id droolsId,
+      di.drools_name droolsName
+    from drools_info di
+    left join drools_vers dv on dv.drools_id = di.id
+  </select>
+  <select id="selectDroolsInfoVers" resultType="com.wenba.domain.DroolsIdVers">
+    select
+      distinct(dv.drools_vers) droolsVers
+    from drools_info di
+    left join drools_vers dv on dv.drools_id = di.id
+  </select>
+</mapper>

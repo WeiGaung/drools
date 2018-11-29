@@ -1,0 +1,150 @@
+#
+# server
+#
+server:
+  port: @server.port@
+  error:
+    whitelabel:
+      enabled: false
+  tomcat:
+    max-threads: 1000
+    accept-count: 1200
+    max-connections: 20000
+    min-spare-threads: 25
+    connection-timeout: 2000
+
+spring:
+  application:
+    name: wenba-example
+  cloud:
+    consul:
+      host: @wenba.consul.host@
+      port: @wenba.consul.port@
+
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    master:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: @wenba.master.datasource.url@
+      username: @wenba.master.datasource.username@
+      password: @wenba.master.datasource.password@
+      maxActive: 200
+      minIdle: 10
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 'x'
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      maxPoolPreparedStatementPerConnectionSize: 20
+  redis:
+    host: @wenba.redis.host@
+    password: @wenba.redis.password@
+    port: @wenba.redis.port@
+    timeout: 10000
+    database: 0
+    lettuce:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 8
+        min-idle: 8
+
+#    slave:
+#        driver-class-name: com.mysql.jdbc.Driver
+#        url: jdbc:mysql://127.0.0.1:3306/TEST?useUnicode=true&characterEncoding=utf-8&useSSL=false
+#        username: root
+#        password: rootmysql
+#        maxActive: 200
+#        minIdle: 10
+#        timeBetweenEvictionRunsMillis: 60000
+#        minEvictableIdleTimeMillis: 300000
+#        validationQuery: SELECT 'x'
+#        testWhileIdle: true
+#        testOnBorrow: false
+#        testOnReturn: false
+#        poolPreparedStatements: true
+#        maxPoolPreparedStatementPerConnectionSize: 20
+
+
+
+mybatis:
+  config-location: classpath:mybatis-config.xml
+
+
+
+
+urule pro:
+  config-location: classpath:urule-console-context.xml
+
+#
+# logging config file location
+#
+logging:
+  config: @logging.config@
+  path: @logging.path@
+  level:
+    default: @logging.level.default@
+    commons: @logging.level.commons@
+    mybatis: @logging.level.mybatis@
+
+app:
+  id: wenba-example-application
+
+
+#
+#drools
+#
+
+drools:
+  path: @drools.rule.drl.path@
+  package: @drools.rule.drl.params.package@
+  kmodule: @drools.rule.kmodule.path@
+
+
+#
+# jetcache
+#
+#jetcache:
+#  statIntervalMinutes: 15
+#  areaInCacheName: false
+#  local:
+#    default:
+#      type: linkedhashmap
+#      keyConvertor: fastjson
+#    otherCacheName:
+#      type: xxx
+#      keyConverter: yyy
+#  remote:
+#    default:
+#      type: redis
+#      keyConvertor: fastjson
+#      valueEncoder: java
+#      valueDecoder: java
+#      poolConfig:
+#        minIdle: 5
+#        maxIdle: 20
+#        maxTotal: 50
+#      host: 127.0.0.1
+#      port: 6379
+
+#jetcache:
+#  statIntervalMinutes: 15
+#  areaInCacheName: false
+#  local:
+#    default:
+#      type: linkedhashmap
+#      keyConvertor: fastjson
+#      limit: 100
+
+
+#thymelea模板配置
+#spring.thymeleaf.prefix=classpath:/templates/
+#spring.thymeleaf.suffix=.html
+#spring.thymeleaf.mode=HTML5
+#spring.thymeleaf.encoding=UTF-8
+#spring.thymeleaf.content-type=text/html
+#spring.thymeleaf.cache=false
+#spring.resources.chain.strategy.content.enabled=true
+#spring.resources.chain.strategy.content.paths=/**

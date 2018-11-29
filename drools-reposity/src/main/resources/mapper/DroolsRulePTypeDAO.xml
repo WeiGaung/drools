@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wenba.reposity.drools.DroolsRulePTypeDao">
+
+  <resultMap id="BaseResultMap" type="com.wenba.domain.DroolsRulePType">
+    <id column="p_type_id" jdbcType="INTEGER" property="pTypeId" />
+    <result column="drools_id" jdbcType="INTEGER" property="droolsId" />
+    <result column="drools_vers" jdbcType="VARCHAR" property="droolsVers" />
+    <result column="drools_name" jdbcType="VARCHAR" property="droolsName" />
+    <result column="p_type" jdbcType="VARCHAR" property="pType" />
+    <result column="p_name" jdbcType="VARCHAR" property="pName" />
+    <result column="p_source" jdbcType="TINYINT" property="pSource" />
+    <result column="p_bean_name" jdbcType="VARCHAR" property="pBeanName" />
+    <result column="p_type_status" jdbcType="TINYINT" property="pTypeStatus" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="ext" jdbcType="VARCHAR" property="ext" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    p_type_id, drools_id, drools_vers, p_type, p_name, p_source, p_bean_name, p_type_status, 
+    DATE_FORMAT(create_time,"%Y-%m-%d") create_time,DATE_FORMAT(update_time,"%Y-%m-%d") update_time, ext
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from drools_rule_p_type
+    where p_type_id = #{pTypeId,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from drools_rule_p_type
+    where p_type_id = #{pTypeId,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.wenba.domain.DroolsRulePType">
+    insert into drools_rule_p_type (p_type_id, drools_id, drools_vers, 
+      p_type, p_name, p_source, 
+      p_bean_name, p_type_status, create_time, 
+      update_time, ext)
+    values (#{pTypeId,jdbcType=INTEGER}, #{droolsId,jdbcType=INTEGER}, #{droolsVers,jdbcType=VARCHAR}, 
+      #{pType,jdbcType=VARCHAR}, #{pName,jdbcType=VARCHAR}, #{pSource,jdbcType=TINYINT}, 
+      #{pBeanName,jdbcType=VARCHAR}, #{pTypeStatus,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{ext,jdbcType=VARCHAR})
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.wenba.domain.DroolsRulePType">
+    insert into drools_rule_p_type
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pTypeId != null">
+        p_type_id,
+      </if>
+      <if test="droolsId != null">
+        drools_id,
+      </if>
+      <if test="droolsVers != null">
+        drools_vers,
+      </if>
+      <if test="pType != null">
+        p_type,
+      </if>
+      <if test="pName != null">
+        p_name,
+      </if>
+      <if test="pSource != null">
+        p_source,
+      </if>
+      <if test="pBeanName != null">
+        p_bean_name,
+      </if>
+      <if test="pTypeStatus != null">
+        p_type_status,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="ext != null">
+        ext,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pTypeId != null">
+        #{pTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="droolsId != null">
+        #{droolsId,jdbcType=INTEGER},
+      </if>
+      <if test="droolsVers != null">
+        #{droolsVers,jdbcType=VARCHAR},
+      </if>
+      <if test="pType != null">
+        #{pType,jdbcType=VARCHAR},
+      </if>
+      <if test="pName != null">
+        #{pName,jdbcType=VARCHAR},
+      </if>
+      <if test="pSource != null">
+        #{pSource,jdbcType=TINYINT},
+      </if>
+      <if test="pBeanName != null">
+        #{pBeanName,jdbcType=VARCHAR},
+      </if>
+      <if test="pTypeStatus != null">
+        #{pTypeStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ext != null">
+        #{ext,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.wenba.domain.DroolsRulePType">
+    update drools_rule_p_type
+    <set>
+      <if test="droolsId != null">
+        drools_id = #{droolsId,jdbcType=INTEGER},
+      </if>
+      <if test="droolsVers != null">
+        drools_vers = #{droolsVers,jdbcType=VARCHAR},
+      </if>
+      <if test="pType != null">
+        p_type = #{pType,jdbcType=VARCHAR},
+      </if>
+      <if test="pName != null">
+        p_name = #{pName,jdbcType=VARCHAR},
+      </if>
+      <if test="pSource != null">
+        p_source = #{pSource,jdbcType=TINYINT},
+      </if>
+      <if test="pBeanName != null">
+        p_bean_name = #{pBeanName,jdbcType=VARCHAR},
+      </if>
+      <if test="pTypeStatus != null">
+        p_type_status = #{pTypeStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ext != null">
+        ext = #{ext,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where p_type_id = #{pTypeId,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.wenba.domain.DroolsRulePType">
+    update drools_rule_p_type
+    set drools_id = #{droolsId,jdbcType=INTEGER},
+      drools_vers = #{droolsVers,jdbcType=VARCHAR},
+      p_type = #{pType,jdbcType=VARCHAR},
+      p_name = #{pName,jdbcType=VARCHAR},
+      p_source = #{pSource,jdbcType=TINYINT},
+      p_bean_name = #{pBeanName,jdbcType=VARCHAR},
+      p_type_status = #{pTypeStatus,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      ext = #{ext,jdbcType=VARCHAR}
+    where p_type_id = #{pTypeId,jdbcType=INTEGER}
+  </update>
+
+
+
+
+
+  <!-- 新增参数信息 -->
+  <insert id="insertParamsInfoSin" parameterType="com.wenba.domain.DroolsRulePType">
+    insert into drools_rule_p_type
+    ( drools_id, drools_vers,
+    p_type, p_name, p_source,
+    p_bean_name, p_type_status,
+    ext )
+    values
+      ( #{droolsId,jdbcType=INTEGER}, #{droolsVers,jdbcType=VARCHAR},
+      #{pType,jdbcType=VARCHAR}, #{pName,jdbcType=VARCHAR}, #{pSource,jdbcType=TINYINT},
+      #{pBeanName,jdbcType=VARCHAR}, #{pTypeStatus,jdbcType=TINYINT},
+      #{ext,jdbcType=VARCHAR} )
+  </insert>
+
+  <insert id="insertParamsInfo" parameterType="com.wenba.domain.DroolsRulePType">
+    insert into drools_rule_p_type
+    ( drools_id, drools_vers,
+    p_type, p_name, p_source,
+    p_bean_name, p_type_status,
+    ext )
+    values
+    <foreach item="item" collection="list" separator=",">
+      ( #{item.droolsId,jdbcType=INTEGER}, #{item.droolsVers,jdbcType=VARCHAR},
+      #{item.pType,jdbcType=VARCHAR}, #{item.pName,jdbcType=VARCHAR}, #{item.pSource,jdbcType=TINYINT},
+      #{item.pBeanName,jdbcType=VARCHAR}, #{item.pTypeStatus,jdbcType=TINYINT},
+      #{item.ext,jdbcType=VARCHAR} )
+    </foreach>
+  </insert>
+
+
+  <!-- 校验参数类型是否已存在 -->
+  <select id="checkParamsInfo" parameterType="String" resultType="int" >
+    select count(1) as count
+      from drools_rule_p_type
+    where
+      p_type = #{_parameter}
+  </select>
+
+
+
+  <!-- 更新参数 -->
+  <!--<update id="updateParamsInfo" parameterType="java.util.List" statementType="STATEMENT">
+    <foreach collection="list" item="item" separator=";">
+      update drools_rule_p_type
+      <set>
+          update_time = now(),
+        <if test="item.pType != null">
+          p_type = '${item.pType}',
+        </if>
+        <if test="item.pName != null">
+          p_name = '${item.pName}',
+        </if>
+        <if test="item.pTypeStatus != null">
+          p_type_status = ${item.pTypeStatus},
+        </if>
+        <if test="item.ext != null">
+          ext = '${item.ext}',
+        </if>
+      </set>
+        <where>
+            p_type_id = ${item.pTypeId}
+        </where>
+    </foreach>
+  </update>-->
+
+
+  <!-- 更新参数 -->
+  <update id="updateParamsInfoSin" parameterType="com.wenba.domain.DroolsRulePType" >
+    update drools_rule_p_type
+    <set>
+      update_time = now(),
+      <if test="createTime != null and createTime != ''">
+        create_time = #{createTime},
+      </if>
+      <if test="pType != null and pType != ''">
+        p_type = #{pType},
+      </if>
+      <if test="pName != null and pName != ''">
+        p_name = #{pName},
+      </if>
+      <if test="pSource != null and pSource != ''">
+        p_source = #{pSource},
+      </if>
+      <if test="pTypeStatus != null and pTypeStatus != ''">
+        p_type_status = #{pTypeStatus},
+      </if>
+    </set>
+    <where>
+      p_type_id = #{pTypeId}
+    </where>
+  </update>
+
+  <update id="updateParamsInfo" parameterType="java.util.List" statementType="STATEMENT">
+    <foreach collection="list" item="item" separator=";">
+      update drools_rule_p_type
+      <set>
+        update_time = now(),
+        <if test="item.pType!=null ">
+          p_type ='${item.pType}',
+        </if>
+        <if test="item.pName != null">
+          p_name = '#{item.pName}',
+        </if>
+        <if test="item.pSource != null">
+          p_source = ${item.pSource},
+        </if>
+        <if test="item.pBeanName != null">
+          p_bean_name = '${item.pBeanName}',
+        </if>
+        <if test="item.pTypeStatus!=null ">
+          p_type_status ='${item.pTypeStatus}',
+        </if>
+        <if test="item.ext!=null ">
+          ext ='${item.ext}',
+        </if>
+      </set>
+      <where>
+        <if test="item.pTypeId != null">
+          and p_type_id = ${item.pTypeId}
+        </if>
+        <if test="item.droolsId != null">
+          and drools_id = ${item.droolsId}
+        </if>
+        <if test="item.droolsVers != null">
+          and drools_vers = '${item.droolsVers}'
+        </if>
+      </where>
+    </foreach>
+  </update>
+
+
+
+  <!-- 查询所有的参数信息id -->
+  <select id="selectParamsInfoIds" resultType="com.wenba.domain.DroolsRulePType">
+    select
+      distinct p_type_id as pTypeId,p_type as pType,p_bean_name as pBeanName
+    from drools_rule_p_type
+  </select>
+
+
+  <!-- 查询所有的参数信息 -->
+  <select id="selectParamsInfoListNum" parameterType="com.wenba.domain.DroolsRulePType" resultType="int">
+    select
+    count(p_type_id) as total
+    from drools_rule_p_type
+    <where>
+      <if test="pTypeId != null and pTypeId != ''">
+        and p_type_id = #{pTypeId}
+      </if>
+      <if test = "droolsId != null and droolsId != ''">
+        and drools_id = #{droolsId}
+      </if>
+      <if test = "droolsVers != null and droolsVers != ''">
+        and drools_vers = #{droolsVers}
+      </if>
+
+      <!--<if test = "create_start != null and create_start != ''">
+        <if test = "create_end != null and create_end != ''">
+          and create_time BETWEEN #{create_start} AND #{create_end}
+        </if>
+        <if test = "create_end == null or create_end == ''">
+          and create_time &gt; #{create_start}
+        </if>
+      </if>
+
+      <if test = "create_end != null and create_end != ''">
+        <if test = "create_start == null or create_start == ''">
+          AND create_time &lt; #{create_end}
+        </if>
+      </if>-->
+    </where>
+
+  </select>
+
+  <select id="selectParamsInfo" parameterType="java.util.List" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from drools_rule_p_type
+    where
+    <if test="listIds != null  and  listIds.size() != 0  ">
+      p_type_id in
+      <foreach item="id" index="index" collection="listIds"  open="(" separator="," close=")">
+        #{id}
+      </foreach>
+    </if>
+  </select>
+
+  <select id="selectParamsInfoList" parameterType="com.wenba.domain.DroolsRulePType" resultMap="BaseResultMap">
+    select
+    drpt.p_type_id, drpt.drools_id, di.drools_name,drpt.drools_vers, drpt.p_type, drpt.p_name, drpt.p_source, drpt.p_bean_name, drpt.p_type_status,
+    DATE_FORMAT(drpt.create_time,"%Y-%m-%d") create_time,
+    DATE_FORMAT(drpt.update_time,"%Y-%m-%d") update_time
+    from drools_rule_p_type drpt
+    left join drools_info di on drpt.drools_id = di.id
+    <where>
+      <if test="pTypeId != null and pTypeId != ''">
+        and drpt.p_type_id = #{pTypeId}
+      </if>
+      <if test = "droolsId != null and droolsId != ''">
+        and drpt.drools_id = #{droolsId}
+      </if>
+      <if test = "droolsVers != null and droolsVers != ''">
+        and drpt.drools_vers = #{droolsVers}
+      </if>
+
+      <!--<if test = "create_start != null and create_start != ''">
+        <if test = "create_end != null and create_end != ''">
+          and create_time BETWEEN #{create_start} AND #{create_end}
+        </if>
+        <if test = "create_end == null or create_end == ''">
+          and create_time &gt; #{create_start}
+        </if>
+      </if>
+
+      <if test = "create_end != null and create_end != ''">
+        <if test = "create_start == null or create_start == ''">
+          AND create_time &lt; #{create_end}
+        </if>
+      </if>-->
+    </where>
+      limit #{pageNum},#{pageSize}
+  </select>
+
+
+
+  <!-- 记录生成实体类名称 -->
+  <update id="updateDrBeanName" parameterType="com.wenba.domain.DroolsRulePType" >
+    update drools_rule_p_type
+    <set>
+      update_time = now(),
+      <if test="pBeanName != null">
+        p_bean_name = #{pBeanName},
+      </if>
+    </set>
+    where
+        drools_id = ${droolsId}
+        and drools_vers = #{droolsVers}
+  </update>
+
+  <!-- 校验实体类是否存在 -->
+  <select id="checkDroolsRuleBean" parameterType="com.wenba.domain.DroolsRulePType" resultType="int" >
+      select if(sum(isnull(p_bean_name)) > 0, 1, 0) as count
+		from drools_rule_p_type
+      where
+        drools_id = ${droolsId}
+		and
+		drools_vers = #{droolsVers}
+  </select>
+
+</mapper>

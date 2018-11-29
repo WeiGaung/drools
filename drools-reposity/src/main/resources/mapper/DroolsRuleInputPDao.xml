@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wenba.reposity.drools.DroolsRuleInputPDao">
+
+  <resultMap id="BaseResultMap" type="com.wenba.domain.DroolsRuleInputP">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="drools_id" jdbcType="INTEGER" property="droolsId" />
+    <result column="drools_vers" jdbcType="VARCHAR" property="droolsVers" />
+    <result column="input_p_loc" jdbcType="INTEGER" property="inputPLoc" />
+    <result column="input_p_status" jdbcType="TINYINT" property="inputPStatus" />
+    <result column="p_type_id" jdbcType="INTEGER" property="pTypeId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="ext" jdbcType="VARCHAR" property="ext" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, drools_id, drools_vers, input_p_loc, input_p_status, p_type_id, create_time, 
+    update_time, ext
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from drools_rule_input_p
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from drools_rule_input_p
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.wenba.domain.DroolsRuleInputP">
+    insert into drools_rule_input_p (id, drools_id, drools_vers, 
+      input_p_loc, input_p_status, p_type_id, 
+      create_time, update_time, ext
+      )
+    values (#{id,jdbcType=INTEGER}, #{droolsId,jdbcType=INTEGER}, #{droolsVers,jdbcType=VARCHAR}, 
+      #{inputPLoc,jdbcType=INTEGER}, #{inputPStatus,jdbcType=TINYINT}, #{pTypeId,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{ext,jdbcType=VARCHAR}
+      )
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.wenba.domain.DroolsRuleInputP">
+    insert into drools_rule_input_p
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="droolsId != null">
+        drools_id,
+      </if>
+      <if test="droolsVers != null">
+        drools_vers,
+      </if>
+      <if test="inputPLoc != null">
+        input_p_loc,
+      </if>
+      <if test="inputPStatus != null">
+        input_p_status,
+      </if>
+      <if test="pTypeId != null">
+        p_type_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="ext != null">
+        ext,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="droolsId != null">
+        #{droolsId,jdbcType=INTEGER},
+      </if>
+      <if test="droolsVers != null">
+        #{droolsVers,jdbcType=VARCHAR},
+      </if>
+      <if test="inputPLoc != null">
+        #{inputPLoc,jdbcType=INTEGER},
+      </if>
+      <if test="inputPStatus != null">
+        #{inputPStatus,jdbcType=TINYINT},
+      </if>
+      <if test="pTypeId != null">
+        #{pTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ext != null">
+        #{ext,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.wenba.domain.DroolsRuleInputP">
+    update drools_rule_input_p
+    <set>
+      <if test="droolsId != null">
+        drools_id = #{droolsId,jdbcType=INTEGER},
+      </if>
+      <if test="droolsVers != null">
+        drools_vers = #{droolsVers,jdbcType=VARCHAR},
+      </if>
+      <if test="inputPLoc != null">
+        input_p_loc = #{inputPLoc,jdbcType=INTEGER},
+      </if>
+      <if test="inputPStatus != null">
+        input_p_status = #{inputPStatus,jdbcType=TINYINT},
+      </if>
+      <if test="pTypeId != null">
+        p_type_id = #{pTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ext != null">
+        ext = #{ext,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.wenba.domain.DroolsRuleInputP">
+    update drools_rule_input_p
+    set drools_id = #{droolsId,jdbcType=INTEGER},
+      drools_vers = #{droolsVers,jdbcType=VARCHAR},
+      input_p_loc = #{inputPLoc,jdbcType=INTEGER},
+      input_p_status = #{inputPStatus,jdbcType=TINYINT},
+      p_type_id = #{pTypeId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      ext = #{ext,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+
+
+  <!-- 新增输入参数信息 -->
+  <insert id="insertDroolsRuleInputP" parameterType="com.wenba.domain.DroolsRuleInputP">
+    insert into drools_rule_input_p
+    (id, drools_id, drools_vers,
+    input_p_loc, input_p_status, p_type_id,
+    ext
+    )
+    values
+    <foreach item="item" collection="list" separator=",">
+      (#{item.id,jdbcType=INTEGER}, #{item.droolsId,jdbcType=INTEGER}, #{item.droolsVers,jdbcType=VARCHAR},
+      #{item.inputPLoc,jdbcType=INTEGER}, #{item.inputPStatus,jdbcType=TINYINT}, #{item.pTypeId,jdbcType=INTEGER},
+      #{item.ext,jdbcType=VARCHAR}
+      )
+    </foreach>
+  </insert>
+
+
+  <!-- 校验输入参数的规则和版本及参数类型是否已存在 -->
+  <select id="checkCreateDroolsRuleInputP" parameterType="com.wenba.domain.DroolsRuleInputP" resultType="int" >
+      select sum(count) from (
+        select if(count(1) > 0, 1, 0) as count
+          from drools_vers
+        where
+          drools_id = ${droolsId}
+          and
+          drools_vers = #{droolsVers}
+
+      union all
+        select if(count(1) > 0, 1, 0) as count
+		  from drools_rule_p_type
+        where p_type_id = ${pTypeId}
+        ) T
+  </select>
+
+  <!-- 校验输入参数的规则和版本是否已存在 -->
+  <select id="checkDroolsRuleInputP" parameterType="com.wenba.domain.DroolsRuleInputP" resultType="int" >
+    select count(1) as count
+      from drools_vers
+    where
+      drools_id = ${droolsId}
+      and
+      drools_vers = #{droolsVers}
+  </select>
+
+
+
+  <!-- 更新输入参数信息 -->
+  <update id="updateDroolsRuleInputP" parameterType="java.util.List" statementType="STATEMENT">
+    <foreach collection="list" item="item" separator=";">
+      update drools_rule_input_p
+      <set>
+          update_time = now(),
+        <if test="item.droolsId != null">
+          drools_id = ${item.droolsId},
+        </if>
+        <if test="item.droolsVers != null">
+          drools_vers = '${item.droolsVers}',
+        </if>
+        <if test="item.inputPLoc != null">
+          input_p_loc = ${item.inputPLoc},
+        </if>
+        <if test="item.inputPStatus != null">
+          input_p_status = ${item.inputPStatus},
+        </if>
+        <if test="item.pTypeId != null">
+          p_type_id = ${item.pTypeId},
+        </if>
+        <if test="item.ext != null">
+          ext = '${item.ext}',
+        </if>
+      </set>
+      <where>
+          drools_id = ${item.droolsId}
+          and drools_vers = '${item.droolsVers}'
+      </where>
+    </foreach>
+  </update>
+
+
+
+  <!-- 查询所有的输入参数信息 -->
+  <select id="selectDroolsRuleInputP" parameterType="java.util.List" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from drools_rule_input_p
+    where
+    <if test="listDrip != null  and  listDrip.size() != 0  ">
+      drools_id in
+      <foreach item="item" index="index" collection="listDrip"  open="(" separator="," close=")">
+        #{item.droolsId}
+      </foreach>
+    </if>
+    <if test="listDrip != null  and  listDrip.size() != 0  ">
+      and drools_vers in
+      <foreach item="item" index="index" collection="listDrip"  open="(" separator="," close=")">
+        #{item.droolsVers}
+      </foreach>
+    </if>
+  </select>
+
+</mapper>

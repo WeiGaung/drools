@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kmodule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://www.drools.org/xsd/kmodule">
+
+    <kbase name="point-rulesKB" packages="rules">
+        <ksession name="point-rulesKS"/>
+    </kbase>
+
+    <kbase name="templateKB" packages="rules">
+        <ksession name="templateKS"/>
+    </kbase>
+
+
+	<kbase name="investSendIntegral-v1KB" packages="rules.investSendIntegral-v1">
+		<ksession name="investSendIntegral-v1KS"/>
+	</kbase>
+
+</kmodule>

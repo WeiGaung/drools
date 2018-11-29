@@ -1,0 +1,41 @@
+import com.wenba.domain.InvestSendIntegralv1;
+
+rule	"add1"
+	no-loop	true
+	lock-on-active	true
+	salience	1
+	when
+		$s : InvestSendIntegralv1(inParam <= 100)
+	then
+		$s.setOutParam(0);update($s);
+end
+
+rule	"add2"
+	no-loop	true
+	lock-on-active	true
+	salience	1
+	when
+		$s : InvestSendIntegralv1(inParam > 100 && inParam <= 500)
+	then
+		$s.setOutParam(100);update($s);
+end
+
+rule	"add3"
+	no-loop	true
+	lock-on-active	true
+	salience	1
+	when
+		$s : InvestSendIntegralv1(inParam > 500 && inParam <= 1000)
+	then
+		$s.setOutParam(500);update($s);
+end
+
+rule	"add4"
+	no-loop	true
+	lock-on-active	true
+	salience	1
+	when
+		$s : InvestSendIntegralv1(inParam > 1000)
+	then
+		$s.setOutParam(1000);update($s);
+end
